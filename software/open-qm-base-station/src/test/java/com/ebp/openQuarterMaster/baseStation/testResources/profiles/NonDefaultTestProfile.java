@@ -8,7 +8,6 @@ import java.util.Map;
 
 public class NonDefaultTestProfile implements QuarkusTestProfile {
 
-
     private final String testProfile;
     private final Map<String, String> overrides = new HashMap<>();
 

@@ -1,8 +1,8 @@
 package com.ebp.openQuarterMaster.baseStation.testResources.ui;
 
-import com.ebp.openQuarterMaster.baseStation.testResources.data.TestUserService;
+import com.ebp.openQuarterMaster.baseStation.testResources.data.ExternalTestUserService;
 import com.ebp.openQuarterMaster.baseStation.testResources.ui.pages.Root;
-import com.ebp.openQuarterMaster.lib.core.user.User;
+import com.ebp.openQuarterMaster.lib.core.rest.user.UserGetResponse;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -44,7 +44,7 @@ public class WebDriverWrapper implements Closeable {
     @ConfigProperty(name="runningInfo.baseUrl")
     String baseUrl;
     @Inject
-    TestUserService testUserService;
+    ExternalTestUserService testUserService;
 
     @PostConstruct
     void setup(){
@@ -109,7 +109,7 @@ public class WebDriverWrapper implements Closeable {
         log.info("Page loaded: {}", this.getWebDriver().getCurrentUrl());
     }
 
-    public void loginUser(User testUser){
+    public void loginUser(UserGetResponse testUser){
         this.goToIndex();
 
         this.waitForPageLoad();

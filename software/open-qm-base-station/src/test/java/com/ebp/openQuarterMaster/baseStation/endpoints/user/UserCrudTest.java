@@ -4,12 +4,12 @@ import com.ebp.openQuarterMaster.baseStation.testResources.lifecycleManagers.Tes
 import com.ebp.openQuarterMaster.baseStation.testResources.testClasses.RunningServerTest;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.common.http.TestHTTPEndpoint;
-import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.QuarkusIntegrationTest;
 import lombok.extern.slf4j.Slf4j;
 
 
 @Slf4j
-@QuarkusTest
+@QuarkusIntegrationTest
 @QuarkusTestResource(TestResourceLifecycleManager.class)
 @TestHTTPEndpoint(UserCrud.class)
 class UserCrudTest extends RunningServerTest {

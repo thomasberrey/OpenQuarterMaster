@@ -1,7 +1,7 @@
 package com.ebp.openQuarterMaster.baseStation.testResources.testClasses;
 
 import com.ebp.openQuarterMaster.baseStation.service.mongo.MongoService;
-import com.ebp.openQuarterMaster.baseStation.testResources.data.TestUserService;
+import com.ebp.openQuarterMaster.baseStation.testResources.data.InternalTestUserService;
 import com.ebp.openQuarterMaster.baseStation.testResources.ui.WebDriverWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
@@ -28,7 +28,7 @@ public abstract class RunningServerTest extends WebServerTest {
         List<WebDriverWrapper> webDriverWrapperList = (Arrays.stream(this.getClass().getDeclaredFields()).filter((Field curField) -> {
             log.debug("Field: {}", curField.getType());
             return WebDriverWrapper.class.isAssignableFrom(curField.getType()) ||
-                    curField.getType().isAssignableFrom(TestUserService.class);
+                    curField.getType().isAssignableFrom(InternalTestUserService.class);
         }).map((Field curField) -> {
             Object cur;
             log.debug("WebDriverWrapper field: {}", curField.getType());
@@ -67,7 +67,7 @@ public abstract class RunningServerTest extends WebServerTest {
         List<MongoService> svcList = (Arrays.stream(this.getClass().getDeclaredFields()).filter((Field curField) -> {
             log.debug("Field: {}", curField.getType());
             return MongoService.class.isAssignableFrom(curField.getType()) ||
-                    curField.getType().isAssignableFrom(TestUserService.class);
+                    curField.getType().isAssignableFrom(InternalTestUserService.class);
         }).map((Field curField) -> {
             Object cur;
             log.debug("Mongo service field: {}", curField.getType());
@@ -85,9 +85,9 @@ public abstract class RunningServerTest extends WebServerTest {
             if (MongoService.class.isAssignableFrom(cur.getClass())) {
                 log.debug("Was regular MongoService!");
                 return (MongoService) cur;
-            } else if (cur instanceof TestUserService) {
+            } else if (cur instanceof InternalTestUserService) {
                 log.debug("Was testUser service!");
-                return ((TestUserService) cur).getUserService();
+                return ((InternalTestUserService) cur).getUserService();
             }
             log.warn("Was not a service we recognize!");
             return (MongoService) null;

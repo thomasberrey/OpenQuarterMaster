@@ -1,18 +1,17 @@
 package com.ebp.openQuarterMaster.baseStation.endpoints.inventory.items;
 
-import com.ebp.openQuarterMaster.baseStation.service.JwtService;
 import com.ebp.openQuarterMaster.baseStation.service.mongo.InventoryItemService;
+import com.ebp.openQuarterMaster.baseStation.testResources.data.InternalTestUserService;
 import com.ebp.openQuarterMaster.baseStation.testResources.data.InventoryItemTestObjectCreator;
-import com.ebp.openQuarterMaster.baseStation.testResources.data.TestUserService;
 import com.ebp.openQuarterMaster.baseStation.testResources.lifecycleManagers.TestResourceLifecycleManager;
 import com.ebp.openQuarterMaster.baseStation.testResources.testClasses.RunningServerTest;
+import com.ebp.openQuarterMaster.lib.core.rest.user.UserGetResponse;
 import com.ebp.openQuarterMaster.lib.core.storage.InventoryItem;
-import com.ebp.openQuarterMaster.lib.core.user.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.common.http.TestHTTPEndpoint;
-import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.http.ContentType;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
@@ -26,7 +25,7 @@ import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
-@QuarkusTest
+@QuarkusIntegrationTest
 @QuarkusTestResource(value = TestResourceLifecycleManager.class)
 @TestHTTPEndpoint(InventoryItemsCrud.class)
 class InventoryItemsCrudTest extends RunningServerTest {
@@ -40,16 +39,13 @@ class InventoryItemsCrudTest extends RunningServerTest {
     InventoryItemService inventoryItemService;
 
     @Inject
-    JwtService jwtService;
-
-    @Inject
-    TestUserService testUserService;
+    InternalTestUserService testUserService;
 
     @Test
     public void testCreate() throws JsonProcessingException {
-        User user = this.testUserService.getTestUser(false, true);
+        UserGetResponse user = this.testUserService.getTestUser(false, true);
         InventoryItem item = testObjectCreator.getTestObject();
-        ObjectId returned = setupJwtCall(given(), this.jwtService.getUserJwt(user, false).getToken())
+        ObjectId returned = setupJwtCall(given(), this.testUserService.getTestUserToken(user))
                 .contentType(ContentType.JSON)
                 .body(objectMapper.writeValueAsString(item))
                 .when()

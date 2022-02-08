@@ -1,7 +1,7 @@
 package com.ebp.openQuarterMaster.baseStation.testResources.testClasses;
 
 import com.ebp.openQuarterMaster.baseStation.service.mongo.MongoService;
-import com.ebp.openQuarterMaster.baseStation.testResources.data.TestUserService;
+import com.ebp.openQuarterMaster.baseStation.testResources.data.InternalTestUserService;
 import com.ebp.openQuarterMaster.lib.core.MainObject;
 import com.ebp.openQuarterMaster.lib.core.user.User;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @Slf4j
 public abstract class MongoServiceTest<T extends MainObject, S extends MongoService<T>> extends RunningServerTest {
 
-    protected TestUserService testUserService;
+    protected InternalTestUserService testUserService;
 
     protected abstract T getTestObject();
 

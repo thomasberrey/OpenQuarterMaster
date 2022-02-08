@@ -1,17 +1,17 @@
 package com.ebp.openQuarterMaster.baseStation.endpoints.user;
 
-import com.ebp.openQuarterMaster.baseStation.testResources.data.TestUserService;
+import com.ebp.openQuarterMaster.baseStation.testResources.data.ExternalTestUserService;
 import com.ebp.openQuarterMaster.baseStation.testResources.lifecycleManagers.TestResourceLifecycleManager;
 import com.ebp.openQuarterMaster.baseStation.testResources.profiles.ExternalAuthTestProfile;
 import com.ebp.openQuarterMaster.baseStation.testResources.testClasses.RunningServerTest;
 import com.ebp.openQuarterMaster.lib.core.rest.user.UserCreateRequest;
-import com.ebp.openQuarterMaster.lib.core.user.User;
+import com.ebp.openQuarterMaster.lib.core.rest.user.UserGetResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.common.ResourceArg;
 import io.quarkus.test.common.http.TestHTTPEndpoint;
-import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.quarkus.test.junit.TestProfile;
 import io.restassured.http.ContentType;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +24,7 @@ import static io.restassured.RestAssured.given;
 
 
 @Slf4j
-@QuarkusTest
+@QuarkusIntegrationTest
 @TestProfile(ExternalAuthTestProfile.class)
 @QuarkusTestResource(value = TestResourceLifecycleManager.class, initArgs = @ResourceArg(name=TestResourceLifecycleManager.EXTERNAL_AUTH_ARG, value="true"), restrictToAnnotatedClass = true)
 @TestHTTPEndpoint(UserCrud.class)
@@ -32,11 +32,11 @@ class UserCrudExternalTest extends RunningServerTest {
     @Inject
     ObjectMapper objectMapper;
     @Inject
-    TestUserService testUserService;
+    ExternalTestUserService testUserService;
 
     @Test
     public void testCreateUserAttempt() throws JsonProcessingException {
-        User testUser = this.testUserService.getTestUser(false, false);
+        UserGetResponse testUser = this.testUserService.getTestUser(false, false);
 
         UserCreateRequest ucr = new UserCreateRequest(
                 testUser.getFirstName(),

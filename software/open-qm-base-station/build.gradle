@@ -79,3 +79,8 @@ compileJava {
 compileTestJava {
     options.encoding = 'UTF-8'
 }
+
+testNative {
+    testClassesDirs = project.sourceSets.test.output.classesDirs
+    include '**/endpoints/*', '**/ui/*'
+}

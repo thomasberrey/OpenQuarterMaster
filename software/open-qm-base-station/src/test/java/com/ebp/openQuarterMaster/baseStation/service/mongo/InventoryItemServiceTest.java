@@ -1,7 +1,7 @@
 package com.ebp.openQuarterMaster.baseStation.service.mongo;
 
+import com.ebp.openQuarterMaster.baseStation.testResources.data.InternalTestUserService;
 import com.ebp.openQuarterMaster.baseStation.testResources.data.InventoryItemTestObjectCreator;
-import com.ebp.openQuarterMaster.baseStation.testResources.data.TestUserService;
 import com.ebp.openQuarterMaster.baseStation.testResources.lifecycleManagers.TestResourceLifecycleManager;
 import com.ebp.openQuarterMaster.baseStation.testResources.testClasses.MongoServiceTest;
 import com.ebp.openQuarterMaster.lib.core.storage.InventoryItem;
@@ -27,7 +27,7 @@ class InventoryItemServiceTest extends MongoServiceTest<InventoryItem, Inventory
     InventoryItemServiceTest(
             InventoryItemService inventoryItemService,
             InventoryItemTestObjectCreator itemTestObjectCreator,
-            TestUserService testUserService
+            InternalTestUserService testUserService
     ) {
         this.inventoryItemService = inventoryItemService;
         this.itemTestObjectCreator = itemTestObjectCreator;

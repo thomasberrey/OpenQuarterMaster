@@ -1,10 +1,10 @@
 package com.ebp.openQuarterMaster.baseStation.service.mongo;
 
 import com.ebp.openQuarterMaster.baseStation.service.mongo.search.PagingOptions;
+import com.ebp.openQuarterMaster.baseStation.testResources.data.InternalTestUserService;
 import com.ebp.openQuarterMaster.baseStation.testResources.data.TestMainObject;
 import com.ebp.openQuarterMaster.baseStation.testResources.data.TestMongoService;
 import com.ebp.openQuarterMaster.baseStation.testResources.data.TestMongoServiceAllowNullUserCreate;
-import com.ebp.openQuarterMaster.baseStation.testResources.data.TestUserService;
 import com.ebp.openQuarterMaster.baseStation.testResources.lifecycleManagers.TestResourceLifecycleManager;
 import com.ebp.openQuarterMaster.baseStation.testResources.testClasses.RunningServerTest;
 import com.ebp.openQuarterMaster.lib.core.history.EventType;
@@ -44,7 +44,7 @@ class MongoServiceTest extends RunningServerTest {
     TestMongoServiceAllowNullUserCreate testMongoServiceAllowNullUserCreate;
 
     @Inject
-    TestUserService testUserService;
+    InternalTestUserService testUserService;
 
     // <editor-fold desc="Count">
     @Test
