@@ -61,6 +61,7 @@ dependencies {
      */
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.quarkus:quarkus-jacoco' // https://quarkus.io/guides/tests-with-coverage
+    testImplementation "org.testcontainers:junit-jupiter:1.16.3"
     testImplementation 'io.rest-assured:rest-assured'
 
     testImplementation "org.testcontainers:mongodb:1.16.3"

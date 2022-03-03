@@ -2,20 +2,31 @@ package com.ebp.openQuarterMaster.baseStation.testResources.testClasses;
 
 import com.ebp.openQuarterMaster.baseStation.service.mongo.MongoService;
 import com.ebp.openQuarterMaster.baseStation.testResources.data.TestUserService;
+import com.ebp.openQuarterMaster.baseStation.testResources.lifecycleManagers.TestResourceLifecycleManager;
 import com.ebp.openQuarterMaster.baseStation.testResources.ui.WebDriverWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
+import org.testcontainers.lifecycle.TestDescription;
+import org.testcontainers.lifecycle.TestLifecycleAware;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
 @Execution(ExecutionMode.SAME_THREAD)
-public abstract class RunningServerTest extends WebServerTest {
+public abstract class RunningServerTest extends WebServerTest implements TestLifecycleAware {
+	
+	@Override
+	public void afterTest(TestDescription description, Optional<Throwable> throwable) {
+		log.info("Running lifecycle aware after.");
+		TestResourceLifecycleManager.triggerRecord(description, throwable);
+		TestLifecycleAware.super.afterTest(description, throwable);
+	}
 	
 	//TODO:: this with params
 	@AfterEach
@@ -25,7 +36,6 @@ public abstract class RunningServerTest extends WebServerTest {
 		log.info("Running after method.");
 		findAndCleanupMongoServices();
 		findAndCleanupWebDriverWrapper();
-//		TestResourceLifecycleManager.triggerRecord(description, throwable);
 		log.info("Completed after step.");
 	}
 	

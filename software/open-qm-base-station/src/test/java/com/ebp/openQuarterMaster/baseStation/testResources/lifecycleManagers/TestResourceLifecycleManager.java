@@ -12,7 +12,6 @@ import org.keycloak.representations.idm.ClientRepresentation;
 import org.keycloak.representations.idm.KeysMetadataRepresentation;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.testcontainers.Testcontainers;
 import org.testcontainers.containers.BrowserWebDriverContainer;
 import org.testcontainers.containers.MongoDBContainer;
 import org.testcontainers.lifecycle.TestDescription;
@@ -46,7 +45,7 @@ public class TestResourceLifecycleManager implements QuarkusTestResourceLifecycl
 	private static BrowserWebDriverContainer<?> BROWSER_CONTAINER = null;
 	
 	static {
-		Testcontainers.exposeHostPorts(8081, 8085);
+		org.testcontainers.Testcontainers.exposeHostPorts(8081, 8085);
 	}
 	
 	private boolean externalAuth = false;
@@ -72,7 +71,7 @@ public class TestResourceLifecycleManager implements QuarkusTestResourceLifecycl
 				.withRealmImportFile("keycloak-realm.json");
 			KEYCLOAK_CONTAINER.start();
 			
-			Testcontainers.exposeHostPorts(KEYCLOAK_CONTAINER.getHttpPort());
+			org.testcontainers.Testcontainers.exposeHostPorts(KEYCLOAK_CONTAINER.getHttpPort());
 			
 			sw.stop();
 			log.info(
