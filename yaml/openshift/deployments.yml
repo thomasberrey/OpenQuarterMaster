@@ -182,7 +182,7 @@ items:
             value: "true"
           - name: quarkus.rest-client.demoServiceExternal.perform
             value: "false"
-          image: image-registry.openshift-image-registry.svc:5000/quartermaster/open-qm-base-station:0.0.60-native
+          image: quay.io/tberrey/open-qm-base-station
           imagePullPolicy: IfNotPresent
           name: open-qm-base-station
           ports:
@@ -244,7 +244,7 @@ items:
           version: v1
       spec:
         containers:
-        - image: image-registry.openshift-image-registry.svc:5000/quartermaster/open-qm-plugin-demo:0.0.60-native
+        - image: quay.io/tberrey/open-qm-plugin-demo
           imagePullPolicy: IfNotPresent
           name: open-qm-plugin-demo
           ports:
