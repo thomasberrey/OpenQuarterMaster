@@ -163,7 +163,7 @@ items:
           - name: quarkus.rest-client.demoServiceExternal.url
             value: http://docker-laptop:8080
           - name: runningInfo.baseUrl
-            value: https://istio-ingressgateway-istio-system-qm.apps.sno-demo.nixon.com
+            value: https://istio-ingressgateway-istio-system.apps.imis.tommytec.cloud
           - name: service.externalAuth.url
             value: https://keycloak-sso.apps.sno-demo.nixon.com
           - name: service.externalAuth.realm
@@ -177,7 +177,7 @@ items:
           - name: quarkus.rest-client.demoServiceExternal.readTimeout
             value: "1000"
           - name: runningInfo.hostname
-            value: istio-ingressgateway-istio-system-qm.apps.sno-demo.nixon.com
+            value: istio-ingressgateway-istio-system.apps.imis.tommytec.cloud
           - name: quarkus.rest-client.demoService.perform
             value: "true"
           - name: quarkus.rest-client.demoServiceExternal.perform

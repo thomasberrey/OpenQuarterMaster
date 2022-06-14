@@ -7,4 +7,6 @@ pushd yaml/openshift
 
 oc patch servicemeshmemberroll/default -n istio-system --type=merge -p '{"spec": {"members": ["quartermaster"]}}'
 
+oc patch route/istio-ingressgateway -n istio-system --type=merge -p '{"spec": {"tls": {"termination": "edge"}}}'
+oc patch route/istio-ingressgateway -n istio-system --type=merge -p '{"spec": {"tls": {"insecureEdgeTerminationPolicy": "Redirect"}}}'
 
